@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense Tracker</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>💸 Expense Tracker</h2>
+
+    <!-- ADD EXPENSE FORM -->
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="amount" placeholder="Amount ₹" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Expenses</h3>
+
+    <!-- EXPENSE LIST -->
+    <ul>
+        {% for e in expenses %}
+            <li>
+                <span>{{ e.category }} – ₹{{ e.amount }}</span>
+
+                <!-- DELETE BUTTON -->
+                <a href="{% url 'delete_expense' e.id %}"
+                   style="color:red; text-decoration:none; font-size:18px;">
+                   ❌
+                </a>
+            </li>
+        {% empty %}
+            <li>No expenses yet</li>
+        {% endfor %}
+    </ul>
+
+    <!-- TOTAL -->
+    <div class="total">
+        Total: ₹{{ total }}
+    </div>
+
+</div>
+
+</body>
+</html>
