@@ -1,15 +1,16 @@
 from pathlib import Path
 
-# BASE DIRECTORY
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY
 SECRET_KEY = "django-insecure-09bfl^83&yx*l^xt1o!q0zzo_aqt@jl9zlto$b7hs3feyvrf7^"
 
-DEBUG = True
+# 🔹 CHANGE 1
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# 🔹 CHANGE 2
+ALLOWED_HOSTS = ["*"]
 
 
 # APPLICATIONS
@@ -44,7 +45,7 @@ ROOT_URLCONF = "expense_tracker.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],   # optional global templates
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -87,10 +88,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-# STATIC FILES (✔ Correct & Complete)
+# STATIC FILES
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "tracker/static"]   # for development
-STATIC_ROOT = BASE_DIR / "staticfiles"             # for deployment
+STATICFILES_DIRS = [BASE_DIR / "tracker/static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # DEFAULT PRIMARY KEY
