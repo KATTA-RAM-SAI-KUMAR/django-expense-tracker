@@ -1,51 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Expense Tracker</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
 
 <div class="container">
+    <h1>💰 Expense Tracker</h1>
 
-    <h2>💸 Expense Tracker</h2>
+    <!-- Budget Form -->
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="budget" placeholder="Enter Total Budget ₹" required>
+        <button type="submit" name="set_budget">Set Budget</button>
+    </form>
 
-    <!-- ADD EXPENSE FORM -->
+    <div class="summary">
+        <p>💵 Budget: ₹{{ budget }}</p>
+        <p>🔥 Spent: ₹{{ spent }}</p>
+        <p>💾 Remaining: ₹{{ remaining }}</p>
+    </div>
+
+    <!-- Expense Form -->
     <form method="POST">
         {% csrf_token %}
         <input type="number" name="amount" placeholder="Amount ₹" required>
         <input type="text" name="category" placeholder="Category" required>
-        <button type="submit">Add</button>
+        <button type="submit" name="add_expense">Add Expense</button>
     </form>
 
-    <h3>Expenses</h3>
-
-    <!-- EXPENSE LIST -->
+    <h2>Expenses</h2>
     <ul>
         {% for e in expenses %}
-            <li>
-                <span>{{ e.category }} – ₹{{ e.amount }}</span>
-
-                <!-- DELETE BUTTON -->
-                <a href="{% url 'delete_expense' e.id %}"
-                   style="color:red; text-decoration:none; font-size:18px;">
-                   ❌
-                </a>
-            </li>
+            <li>{{ e.category }} — ₹{{ e.amount }}</li>
         {% empty %}
             <li>No expenses yet</li>
         {% endfor %}
     </ul>
-
-    <!-- TOTAL -->
-    <div class="total">
-        Total: ₹{{ total }}
-    </div>
-
 </div>
 
 </body>

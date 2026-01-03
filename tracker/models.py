@@ -3,7 +3,7 @@ from django.db import models
 class Expense(models.Model):
     amount = models.IntegerField()
     category = models.CharField(max_length=100)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True)  # ✅ FIXED
 
     def __str__(self):
-        return self.category
+        return f"{self.category} - ₹{self.amount}"
