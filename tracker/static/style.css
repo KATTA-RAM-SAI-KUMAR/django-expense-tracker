@@ -37,3 +37,9 @@ button {
 ul {
     padding-left: 20px;
 }
+
+.delete {
+    color: red;
+    margin-left: 10px;
+    text-decoration: none;
+}

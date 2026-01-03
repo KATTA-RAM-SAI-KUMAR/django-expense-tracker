@@ -37,3 +37,8 @@ def home(request):
         "spent": spent,
         "remaining": remaining
     })
+
+
+def delete_expense(request, id):
+    Expense.objects.filter(id=id).delete()
+    return redirect("/")

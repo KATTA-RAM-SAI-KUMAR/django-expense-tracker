@@ -34,7 +34,10 @@
     <h2>Expenses</h2>
     <ul>
         {% for e in expenses %}
-            <li>{{ e.category }} — ₹{{ e.amount }}</li>
+            <li>
+                {{ e.category }} — ₹{{ e.amount }}
+                <a href="{% url 'delete_expense' e.id %}" class="delete">❌</a>
+            </li>
         {% empty %}
             <li>No expenses yet</li>
         {% endfor %}
